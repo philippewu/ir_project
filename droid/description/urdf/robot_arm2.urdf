@@ -1,0 +1,116 @@
+<?xml version="1.0"?>
+<robot name="robot">
+
+    <material name="white">
+        <color rgba="1 1 1 1"/>
+    </material>
+
+    <material name="orange">
+        <color rgba="1 0.3 0.1 1"/>
+    </material>
+
+    <material name="blue">
+        <color rgba="0.2 0.2 1 1"/>
+    </material>
+
+    <material name="black">
+        <color rgba="0 0 0 1"/>
+    </material>
+
+    <!-- BASE LINK -->
+
+    <link name="base_link">
+        <visual>
+            <origin xyz="-0.125 0.125 0" rpy="${pi/2} 0 0"/>
+            <geometry>
+                <mesh filename="package://droid/description/meshes/arm2/ground_link.STL" scale="0.001 0.001 0.001"/>
+            </geometry>
+            <material name="white"/>
+        </visual>
+        <collision>
+            <origin xyz="-0.125 0.125 0" rpy="${pi/2} 0 0"/>
+            <geometry>
+                <mesh filename="package://droid/description/meshes/arm2/ground_link.STL" scale="0.001 0.001 0.001"/>
+            </geometry>
+        </collision>
+    </link>
+
+    <!-- LINK 1 -->
+
+    <joint name="link1" type="revolute">
+        <parent link="base_link"/>
+        <child link="link1"/>
+        <origin xyz="0 0 0.05" rpy="0 0 0"/>
+        <axis xyz="0 0 1"/>
+        <limit lower="${-pi}" upper="${pi}" velocity="100" effort="100"/>
+    </joint>
+
+    <link name="link1">
+        <visual>
+            <origin xyz="-0.64472 1.29129 -0.87219" rpy="${pi/2} 0 0"/>
+            <geometry>
+                <mesh filename="package://droid/description/meshes/arm2/arm2_link1.STL" scale="0.001 0.001 0.001"/>
+            </geometry>
+            <material name="white"/>
+        </visual>
+        <collision>
+            <origin xyz="-0.64472 1.29129 -0.87219" rpy="${pi/2} 0 0"/>
+            <geometry>
+                <mesh filename="package://droid/description/meshes/arm2/arm2_link1.STL" scale="0.001 0.001 0.001"/>
+            </geometry>
+        </collision>
+    </link>
+
+    <!-- LINK 2 -->
+
+    <joint name="link2" type="revolute">
+        <parent link="link1"/>
+        <child link="link2"/>
+        <origin xyz="0.750 0 0.580" rpy="0 0 0"/>
+        <axis xyz="0 0 1"/>
+        <limit lower="${-pi}" upper="${pi}" velocity="100" effort="100"/>
+    </joint>
+
+    <link name="link2">
+        <visual>
+            <origin xyz="-0.075 0.075 0" rpy="${pi/2} 0 0"/>
+            <geometry>
+                <mesh filename="package://droid/description/meshes/arm2/arm2_link2.STL" scale="0.001 0.001 0.001"/>
+            </geometry>
+            <material name="white"/>
+        </visual>
+        <collision>
+            <origin xyz="-0.075 0.075 0" rpy="${pi/2} 0 0"/>
+            <geometry>
+                <mesh filename="package://droid/description/meshes/arm2/arm2_link2.STL" scale="0.001 0.001 0.001"/>
+            </geometry>
+        </collision>
+    </link>
+
+    <!-- END EFFECTOR -->
+
+    <joint name="ee" type="revolute">
+        <parent link="link2"/>
+        <child link="ee"/>
+        <origin xyz="0.750 0 0" rpy="0 0 0"/>
+        <axis xyz="0 0 1"/>
+        <limit lower="${-pi/2}" upper="${pi/2}" velocity="100" effort="100"/>
+    </joint>
+
+    <link name="ee">
+        <visual>
+            <origin xyz="1.74894 0.64854 -1.10836" rpy="${pi/2} 0 ${-pi/2}"/>
+            <geometry>
+                <mesh filename="package://droid/description/meshes/arm2/ee_bucket.STL" scale="0.001 0.001 0.001"/>
+            </geometry>
+            <material name="white"/>
+        </visual>
+        <collision>
+            <origin xyz="1.74894 0.64854 -1.10836" rpy="${pi/2} 0 ${-pi/2}"/>
+            <geometry>
+                <mesh filename="package://droid/description/meshes/arm2/ee_bucket.STL" scale="0.001 0.001 0.001"/>
+            </geometry>
+        </collision>
+    </link>
+
+</robot>
